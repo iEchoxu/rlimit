@@ -61,8 +61,9 @@ func (ll *LocalLimiter) Run() {
 		wg.Add(1)
 		go func(url string) {
 			defer func() {
-				wg.Done()
+				<-time.After(time.Second)  // 等待 1s 后释放信号量
 				<-limit
+				wg.Done()
 			}()
 
 			select {
