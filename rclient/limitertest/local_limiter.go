@@ -79,7 +79,6 @@ func (ll *LocalLimiter) Run() {
 			if err != nil {
 				log.Printf("Failed to acquire token for request : %v\n", err)
 				atomic.AddInt32(&failCount, 1)
-				<-limit
 				return
 			}
 
